@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import queryString from 'query-string'
 import { Link } from 'react-router-dom'
 import Card from '../components/Card/Card'
+import Helmet from 'react-helmet'
 
 const FeedWrapper = styled.div`
   display: flex;
@@ -81,12 +82,20 @@ class Feed extends Component {
 
 
   render() {
-    const { data, loading, error } = this.state
+    const { data, loading, error, page } = this.state
     const { match } = this.props
 
 
     if (loading || error) {
-      return <Alert>{loading ? 'Loading...' : error}</Alert>
+      return (
+        <>
+          <Helmet>
+            <title>React Overflow - Questions</title>
+          </Helmet>
+          <Alert>{loading ? 'Loading...' : error}</Alert>
+        </>
+        )
+
     }
 
     return (
